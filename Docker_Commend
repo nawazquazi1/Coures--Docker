@@ -1,0 +1,12 @@
+# Docker container ls for serching runing container 
+# Docker container ls -a for serching all container 
+# Docker container run image name for creating new container
+# Docker container -rm container_id name for delete container 
+# Docker container start container_id for start container
+# Docker container sleep for run container specific time 
+# Docker container stop container_id for stop container
+# Docker container run -d ubuntu sleep 30 for runing container background
+# Docker container run -it ubuntu /bin/bash for entering inside container 
+# Docker container rm ls -aq for finding all container id
+# Docker container rm $(docker container ls -qa) for deleteing all container
+
