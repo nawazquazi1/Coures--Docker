@@ -1,22 +1,95 @@
-# Docker container ls for serching runing container 
-# Docker container ls -a for serching all container 
-# Docker container run image_name for creating new container
-# Docker container -rm container_id name for delete container 
-# Docker container start container_id for start container
-# Docker container sleep for run container specific time 
-# Docker container stop container_id for stop container
-# Docker container run -d ubuntu sleep 30 for runing container background
-# Docker container run -it ubuntu /bin/bash for entering inside container 
-# Docker ps -aq for finding all container id
-# Docker rm -f $(docker ps -aq) for deleteing all container
-# Docker container inspect container_id for finding container information 
-# Docker container logs container_id for logs
-# Docker container top container_id for chacking what's going on inside conatiner 
-# Docker container stat for all conatiner information
-# Docker container run -d -p port:80 nginx for forvding request 
-# Docker container run -- name Container_Name for giving container name 
-# Docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mynginx  for find container ip
-# Docker container exec -it container_id /bin/bash for install what you want 
-# Docker container rename continer_id new name for changing conatiner name
-# Docker container restart continer_id for restart conatiner
+# Container Management
 
+# List running containers
+docker container ls            # Shows currently running containers
+
+# List all containers (running and stopped)
+docker container ls -a         # Shows all containers, including stopped ones
+
+# Create and run a new container from an image
+docker container run image_name # Creates and starts a new container from the specified image
+
+# Start a specific container
+docker container start container_id # Starts a stopped container
+
+# Stop a specific container
+docker container stop container_id  # Stops a running container
+
+# Restart a container
+docker container restart container_id # Restarts a running or stopped container
+
+# Remove a specific container
+docker container rm container_id      # Removes a stopped container
+
+# Forcefully delete all containers
+docker rm -f $(docker ps -aq)          # Removes all containers, running or stopped
+
+# Remove all stopped containers
+docker container prune -f              # Deletes all stopped containers
+
+
+# Container Interaction
+
+# Run a container interactively and enter its shell
+docker container run -it ubuntu /bin/bash # Runs a new container and opens an interactive shell
+
+# Execute a command inside a running container
+docker container exec -it container_id /bin/bash # Executes a command in a running container
+
+# Attach to a running container
+docker container attach container_id        # Attaches to the standard input/output of a running container
+
+# Check what's going on inside a specific container
+docker container top container_id           # Displays the processes running inside a container
+
+# Pause a container (freeze its execution)
+docker container pause container_id         # Pauses the execution of a container
+
+# Unpause a container (resume its execution)
+docker container unpause container_id       # Resumes the execution of a paused container
+
+# Networking and Ports
+
+# Run a container and forward a port
+docker container run -d -p host_port:80 nginx # Runs a container and maps port 80 inside the container to a host port
+
+# Check port mappings for a specific container
+docker container port container_id          # Displays port mappings for a container
+
+# Find the IP address of a specific container
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name # Retrieves the IP address of a container
+
+
+# Monitoring and Logs
+
+# View logs of a specific container
+docker container logs container_id          # Displays the logs of a container
+
+# Get stats for all containers
+docker container stats                       # Shows real-time statistics for all running containers
+
+# Inspect a specific container for detailed information
+docker container inspect container_id        # Displays detailed information about a container
+
+# Utility Commands
+
+# Find all container IDs
+docker ps -aq                               # Lists the IDs of all containers, running and stopped
+
+# Rename a container
+docker container rename container_id new_name # Renames a container
+
+# Kill a container
+docker container kill container_id           # Immediately stops and removes a running container
+
+# Wait for a container to stop and get its exit code
+docker container wait container_id           # Waits for a container to stop and returns its exit code
+
+# Run a container and keep it running for a specific time
+docker container run -d ubuntu sleep 30       # Runs a container in the background and keeps it running for 30 seconds
+
+# Run a container in the background
+docker container run -d ubuntu sleep 30       # Runs a container in detached mode
+
+# Run a container with a specific name
+docker container run --name Container_Name image_name # Runs a container with a specified name
