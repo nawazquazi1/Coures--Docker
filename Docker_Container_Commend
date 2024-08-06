@@ -1,0 +1,22 @@
+# Docker container ls for serching runing container 
+# Docker container ls -a for serching all container 
+# Docker container run image_name for creating new container
+# Docker container -rm container_id name for delete container 
+# Docker container start container_id for start container
+# Docker container sleep for run container specific time 
+# Docker container stop container_id for stop container
+# Docker container run -d ubuntu sleep 30 for runing container background
+# Docker container run -it ubuntu /bin/bash for entering inside container 
+# Docker ps -aq for finding all container id
+# Docker rm -f $(docker ps -aq) for deleteing all container
+# Docker container inspect container_id for finding container information 
+# Docker container logs container_id for logs
+# Docker container top container_id for chacking what's going on inside conatiner 
+# Docker container stat for all conatiner information
+# Docker container run -d -p port:80 nginx for forvding request 
+# Docker container run -- name Container_Name for giving container name 
+# Docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mynginx  for find container ip
+# Docker container exec -it container_id /bin/bash for install what you want 
+# Docker container rename continer_id new name for changing conatiner name
+# Docker container restart continer_id for restart conatiner
+
