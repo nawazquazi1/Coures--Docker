@@ -98,7 +98,13 @@ docker container run -d ubuntu sleep 30       # Runs a container in detached mod
 docker container run --name Container_Name image_name # Runs a container with a specified name
 
 # export container
-docker container export container_id -o my.tar  # export container using .tar file
+docker container export container_id -o my.tar  # export and create container image using .tar file
 
 #import container
-docker image import .tar_File_Name image_name  # import conatiner to image   
+docker image import .tar_File_Name image_name  # import conatiner to image using .tar file
+
+#Create Docker Image From Running Container
+docker container commit container_id conatiner_name -author, -a: Author
+--change, -c: Apply Dockerfile instruction to the created image
+--message, -m: Commit message
+--pause, -p: Pause container during commit       # crating runing conatiner image  
