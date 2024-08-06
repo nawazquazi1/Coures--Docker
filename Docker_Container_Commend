@@ -30,6 +30,9 @@ docker container prune -f              # Deletes all stopped containers
 
 # Container Interaction
 
+# Creates a new container
+docker container create ubuntu # Creates a new container from a specified image but does not start it immediately. The container is created in a stopped state
+
 # Run a container interactively and enter its shell
 docker container run -it ubuntu /bin/bash # Runs a new container and opens an interactive shell
 
@@ -93,3 +96,9 @@ docker container run -d ubuntu sleep 30       # Runs a container in detached mod
 
 # Run a container with a specific name
 docker container run --name Container_Name image_name # Runs a container with a specified name
+
+# export container
+docker container export container_id -o my.tar  # export container using .tar file
+
+#import container
+docker image import .tar_File_Name image_name  # import conatiner to image   
