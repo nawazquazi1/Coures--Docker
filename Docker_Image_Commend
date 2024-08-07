@@ -19,7 +19,7 @@
   docker images   # also use for list images
 
 # Docker Image History
-  docker image history image_name:tag 
+  docker image history image_name:tag  # chack image history
 
 # Docker Image Remove
   docker image rm image_name
