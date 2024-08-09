@@ -27,7 +27,7 @@
   docker rmi
 
 # Docker Image Inspect
-  docker image inspect ubuntu:14.04  # display detailed information for one or more images
+  docker image inspect Image_name:tag  # display detailed information for one or more images
 
 # Docker Image Prune
   docker image prune [OPTIONS]  # delete all images
