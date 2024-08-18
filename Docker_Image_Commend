@@ -8,7 +8,7 @@
 # Docker login
   docker login
   Username: nawazquazi1
-  Password: *******                  # login to docker hub 
+  Password: ***********             # login to docker hub 
 
 # Image Operations push
   docker push <hub-user>/<repo-name>:<tag>  # push image in docker hub
