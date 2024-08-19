@@ -1,9 +1,9 @@
 # Image Operations Pull
- docker image pull ubuntu:14.04  # pull image specific version
+ docker image pull ubuntu:14.04     # pull image specific version
  docker image pull nawazquazi1/myubuntu_free_git  # pull image to docker hub which we creted
 
 # Image Operations tag
-  docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]  #add the images to a repository by appending a specific :<tag> to them
+  docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]   #add the images to a repository by appending a specific :<tag> to them
 
 # Docker login
   docker login
