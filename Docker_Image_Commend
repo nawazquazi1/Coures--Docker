@@ -1,6 +1,27 @@
-# Image Operations Pull
- docker image pull ubuntu:14.04     # pull image specific version
- docker image pull nawazquazi1/myubuntu_free_git  # pull image to docker hub which we creted
+# Pull Image
+docker image pull ubuntu:14.04          # Pull a specific version of the Ubuntu image (14.04)
+docker image pull nawazquazi1/myubuntu_free_git  # Pull a custom image from Docker Hub
+
+# Build Image
+docker image build -t myimage:1.0 .     # Build an image from a Dockerfile and tag it as myimage:1.0
+
+# Tag Image
+docker image tag myimage:1.0 myrepo/myimage:latest  # Tag an image with a new repository name and tag (latest)
+
+# View Image History
+docker image history ubuntu:14.04       # View the command history used to build the image
+
+# Save Image
+docker image save -o myimage.tar myimage:1.0  # Save an image to a tar file named myimage.tar
+
+# Load Image
+docker image load -i myimage.tar       # Load an image from a tar file named myimage.tar
+
+# Prune Unused Images
+docker image prune                     # Remove all dangling (unused) images from the system
+
+# Commit Container to Image
+docker container commit mycontainer mynewimage:latest  # Save the state of a container as a new image
 
 # Image Operations tag
   docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]   #add the images to a repository by appending a specific :<tag> to them
@@ -29,5 +50,3 @@
 # Docker Image Inspect
   docker image inspect Image_name:tag  # display detailed information for one or more images
 
-# Docker Image Prune
-  docker image prune [OPTIONS]  # delete all images
