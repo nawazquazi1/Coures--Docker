@@ -1,5 +1,5 @@
 #create dockerfile
-  vi dockerfile 
+vi dockerfile 
 
 # Use a lightweight OpenJDK image
 FROM openjdk:11-jre-slim
@@ -68,3 +68,9 @@ USER root
 
 # Default command (optional)
 CMD ["cat", "/tmp/1stwhoami.txt", "/tmp/2ndwhoami.txt"]
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set the ENTRYPOINT for the container
+ENTRYPOINT ["python", "app.py"]
