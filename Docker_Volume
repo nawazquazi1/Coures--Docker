@@ -30,3 +30,15 @@ docker run --rm -v my_volume:/volume -v $(pwd):/backup alpine tar czf /backup/my
 
 # Restore volume contents from a tar file
 docker run --rm -v my_volume:/volume -v $(pwd):/backup alpine tar xzf /backup/my_volume_backup.tar.gz -C /volume  # Restore Volume
+
+# Run a container with a bind mount from the host to the container
+docker run -d -v /host/path:/container/path my_image  # Use Bind Mount in Container
+
+# Run a container with read-only bind mount
+docker run -d -v /host/path:/container/path:ro my_image  # Use Read-Only Bind Mount in Container
+
+# Inspect a container to see the bind mounts
+docker inspect <container_id> --format '{{ json .Mounts }}'  # Inspect Bind Mounts in Container
+
+# Remove a container (bind mounts are automatically cleaned up unless they are still in use)
+docker rm <container_id>  # Remove Container
