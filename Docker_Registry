@@ -53,3 +53,43 @@ docker pull localhost:5000/my_image  # Pull the image from the local registry
 
 # Delete an image from a local Docker registry
 docker image rm localhost:5000/my_image  # Remove the image from the local registry
+
+# Create a password file with a user for basic authentication
+htpasswd -c /path/to/htpasswd username  # Create and set password for user
+
+# Run a local Docker registry with basic authentication enabled
+docker run -d -p 5000:5000 --name registry \
+  -v /path/to/htpasswd:/etc/registry/htpasswd \
+  -v /path/to/registry:/var/lib/registry \
+  -e REGISTRY_AUTH=htpasswd \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/etc/registry/htpasswd \
+  registry:2  # Run registry with basic auth
+
+# Generate a self-signed SSL certificate and key
+openssl req -newkey rsa:4096 -nodes -keyout /path/to/certs/registry.key -x509 -days 365 -out /path/to/certs/registry.crt  # Create self-signed cert
+
+# Run a local Docker registry with SSL/TLS enabled
+docker run -d -p 443:443 --name registry \
+  -v /path/to/certs:/certs \
+  -v /path/to/registry:/var/lib/registry \
+  -e REGISTRY_HTTP_SECRET=mysecret \
+  -e REGISTRY_HTTP_HEADERS={"X-Content-Type-Options: nosniff"} \
+  -e REGISTRY_HTTP_SECRET=mysecret \
+  registry:2  # Run registry with SSL/TLS
+
+# Configure Docker to trust the registry's certificate
+mkdir -p /etc/docker/certs.d/localhost:443  # Create certs directory for Docker
+cp /path/to/certs/registry.crt /etc/docker/certs.d/localhost:443/ca.crt  # Copy cert to Docker's trust directory
+sudo systemctl restart docker  # Restart Docker to apply changes
+
+# Log in to the local registry with basic authentication
+docker login localhost:443 -u username -p password  # Log in with credentials
+
+# Pull an image from the local registry
+docker pull localhost:443/my_image  # Pull image from local registry
+
+# Tag an image for the local registry
+docker tag my_image localhost:443/my_image  # Tag image for local registry
+
+# Push the image to the local registry
+docker push localhost:443/my_image  # Push image to local registry
