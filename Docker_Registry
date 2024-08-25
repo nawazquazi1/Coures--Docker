@@ -27,27 +27,29 @@ docker push myrepo/myimage:latest
 docker push myregistry.com/myrepo/myimage:latest
 
 # List all images on the local machine (including those tagged for specific registries)
-docker images  # List local images
+docker image ls  # List local images
 
 # Tag an image for a specific registry
-docker tag [local_image_name]:[tag] [registry_url]/[repository_name]:[tag]  # Tag image for the specified registry
+docker image tag [local_image_name]:[tag] [registry_url]/[repository_name]:[tag]  # Tag image for the specified registry
 # Example
-docker tag myimage:latest myregistry.com/myrepo/myimage:latest
+docker image tag myimage:latest myregistry.com/myrepo/myimage:latest
 
 # Remove an image from a local registry
-docker rmi [image_name]:[tag]  # Remove image from the local Docker registry
+docker image rm [image_name]:[tag]  # Remove image from the local Docker registry
 # Example
-docker rmi myrepo/myimage:latest
+docker image rm myrepo/myimage:latest
 
 # Create a new Docker registry container
-docker run -d -p 5000:5000 --name registry registry:2  # Run a local Docker registry on port 5000
+docker container -d -p 5000:5000 --name registry registry:2  # Run a local Docker registry on port 5000
+
+# Tag an image for a local Docker registry
+docker image tag my_image localhost:5000/my_image  # Tag the image for local registry
 
 # Push an image to a local Docker registry
-docker tag my_image localhost:5000/my_image  # Tag the image for local registry
-docker push localhost:5000/my_image         # Push the image to the local registry
+docker push localhost:5000/my_image  # Push the image to the local registry
 
 # Pull an image from a local Docker registry
 docker pull localhost:5000/my_image  # Pull the image from the local registry
 
 # Delete an image from a local Docker registry
-docker rmi localhost:5000/my_image  # Remove the image from the local registry
+docker image rm localhost:5000/my_image  # Remove the image from the local registry
