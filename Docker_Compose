@@ -1,29 +1,37 @@
-# Define and run multi-container applications
-docker-compose up                  # Start all services defined in the docker-compose.yml file
-docker-compose up -d               # Start services in detached mode (background)
-docker-compose up --build          # Rebuild images before starting containers
+# Start and set up containers defined in the docker-compose.yml file
+docker-compose up                  # Start all services
+docker-compose up -d               # Start all services in detached (background) mode
+docker-compose up --build          # Build images before starting containers
+docker-compose up --scale [service_name]=[number]  # Scale a service (e.g., multiple instances)
 
-# Stop and remove all containers defined in the docker-compose.yml file
-docker-compose down                # Stop and remove containers, networks, volumes, and images created by 'up'
-docker-compose down --volumes      # Stop and remove containers and volumes
+# Stop and remove containers, networks, volumes, and images created by 'up'
+docker-compose down                # Stop and remove services
+docker-compose down --volumes      # Remove services along with volumes
 
-# View logs for services
-docker-compose logs                # View logs of all services
-docker-compose logs [service_name] # View logs for a specific service
+# Display logs of all or specific services
+docker-compose logs                # Show logs of all services
+docker-compose logs [service_name] # Show logs for a specific service
 
 # Restart services
 docker-compose restart             # Restart all services
 docker-compose restart [service_name]  # Restart a specific service
 
-# List all running containers
-docker-compose ps                  # List containers related to the Docker Compose project
+# List running containers associated with the Compose project
+docker-compose ps                  # List containers and view port mappings
 
-# Execute a command in a running container
-docker-compose exec [service_name] [command] # Execute a command in a running service's container
+# Execute a command inside a running container
+docker-compose exec [service_name] [command]  # Run a command inside a service container
+
+# Run a one-off command in a new container of a service
+docker-compose run [service_name] [command]  # Run a one-time command in a service
+
+# Send a SIGKILL signal to stop services
+docker-compose kill                # Kill all running services
+docker-compose kill [service_name] # Kill a specific service
 
 # Build or rebuild services
-docker-compose build               # Build or rebuild services defined in the docker-compose.yml file
-docker-compose build --no-cache   # Build services without using cache
+docker-compose build               # Build or rebuild services
+docker-compose build --no-cache    # Build services without cache
 
 # Stop running services
 docker-compose stop                # Stop all running services
@@ -33,18 +41,34 @@ docker-compose stop [service_name]  # Stop a specific service
 docker-compose rm                  # Remove stopped services
 docker-compose rm -v               # Remove stopped services and their volumes
 
-# Scale services
-docker-compose up --scale [service_name]=[number]  # Scale a service to a specified number of instances
+# Scale the number of containers for a service
+docker-compose up --scale [service_name]=[number]  # Scale a service (e.g., running multiple instances)
+# Example:
+docker-compose up --scale web=3    # Run 3 instances of the 'web' service
 
-# Pull images for services
+# Port mapping and forwarding
+docker-compose up                  # Start services with port mapping defined in docker-compose.yml
+docker-compose run -p [host_port]:[container_port] [service_name]  # Start a service with a specific port mapping
+# Example:
+docker-compose run -p 8080:80 my_service  # Map port 8080 on host to port 80 in the container
+
+# View the port mapping of running containers
+docker-compose ps                  # View port mappings for running services
+
+# Pull service images from a registry
 docker-compose pull                # Pull images for all services
-docker-compose pull [service_name] # Pull image for a specific service
+docker-compose pull [service_name] # Pull an image for a specific service
 
-# Run a one-time command in a service
-docker-compose run [service_name] [command] # Run a one-time command in a new container
+# Push built images to a Docker registry
+docker-compose push                # Push all service images to the specified registry
+docker-compose push [service_name] # Push a specific service image to the registry
 
 # Check the configuration and validate the docker-compose.yml file
-docker-compose config             # Validate and view the docker-compose.yml file configuration
+docker-compose config             # Validate and view the configuration
 
 # Export the current configuration to a file
-docker-compose config > config.yml  # Export the configuration to a file
+docker-compose config > config.yml  # Export configuration to a file
+
+# Get help for any Docker Compose command
+docker-compose help                # Display help for all commands
+docker-compose help [command]      # Display help for a specific command
