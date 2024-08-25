@@ -1,0 +1,32 @@
+# Create a new volume named 'my_volume'
+docker volume create my_volume        # Create Volume
+
+# List all volumes on your system
+docker volume ls                      # List Volumes
+
+# Show detailed information about 'my_volume'
+docker volume inspect my_volume       # Inspect Volume
+
+# Remove the volume named 'my_volume'
+docker volume rm my_volume            # Remove Volume
+
+# Remove all unused volumes from the system
+docker volume prune                   # Remove Unused Volumes
+
+# Run a container with 'my_volume' mounted to '/data' in the container
+docker run -d -v my_volume:/data my_image  # Use Volume in Container
+
+# Inspect container and filter volume usage details
+docker container inspect <container_id> | grep -i volumes  # Inspect Volume Usage in Container
+
+# List all volumes mounted in a specific container
+docker inspect <container_id> --format '{{ json .Mounts }}'   # List Volume Mounts in Container
+
+# Create a volume with specific driver options
+docker volume create --driver local --opt type=tmpfs my_tmpfs_volume  # Create Named Volume with Driver Options
+
+# Backup volume contents to a tar file
+docker run --rm -v my_volume:/volume -v $(pwd):/backup alpine tar czf /backup/my_volume_backup.tar.gz -C /volume .  # Backup Volume
+
+# Restore volume contents from a tar file
+docker run --rm -v my_volume:/volume -v $(pwd):/backup alpine tar xzf /backup/my_volume_backup.tar.gz -C /volume  # Restore Volume
