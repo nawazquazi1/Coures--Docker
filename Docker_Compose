@@ -1,0 +1,50 @@
+# Define and run multi-container applications
+docker-compose up                  # Start all services defined in the docker-compose.yml file
+docker-compose up -d               # Start services in detached mode (background)
+docker-compose up --build          # Rebuild images before starting containers
+
+# Stop and remove all containers defined in the docker-compose.yml file
+docker-compose down                # Stop and remove containers, networks, volumes, and images created by 'up'
+docker-compose down --volumes      # Stop and remove containers and volumes
+
+# View logs for services
+docker-compose logs                # View logs of all services
+docker-compose logs [service_name] # View logs for a specific service
+
+# Restart services
+docker-compose restart             # Restart all services
+docker-compose restart [service_name]  # Restart a specific service
+
+# List all running containers
+docker-compose ps                  # List containers related to the Docker Compose project
+
+# Execute a command in a running container
+docker-compose exec [service_name] [command] # Execute a command in a running service's container
+
+# Build or rebuild services
+docker-compose build               # Build or rebuild services defined in the docker-compose.yml file
+docker-compose build --no-cache   # Build services without using cache
+
+# Stop running services
+docker-compose stop                # Stop all running services
+docker-compose stop [service_name]  # Stop a specific service
+
+# Remove stopped services and their volumes
+docker-compose rm                  # Remove stopped services
+docker-compose rm -v               # Remove stopped services and their volumes
+
+# Scale services
+docker-compose up --scale [service_name]=[number]  # Scale a service to a specified number of instances
+
+# Pull images for services
+docker-compose pull                # Pull images for all services
+docker-compose pull [service_name] # Pull image for a specific service
+
+# Run a one-time command in a service
+docker-compose run [service_name] [command] # Run a one-time command in a new container
+
+# Check the configuration and validate the docker-compose.yml file
+docker-compose config             # Validate and view the docker-compose.yml file configuration
+
+# Export the current configuration to a file
+docker-compose config > config.yml  # Export the configuration to a file
