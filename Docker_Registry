@@ -1,0 +1,53 @@
+# Log in to Docker Hub (default registry) or a custom registry
+docker login [registry_url]    # Log in to the specified Docker registry
+# Example for Docker Hub
+docker login
+# Example for custom registry
+docker login myregistry.com
+
+# Log out from Docker Hub (default registry) or a custom registry
+docker logout [registry_url]   # Log out from the specified Docker registry
+# Example for Docker Hub
+docker logout
+# Example for custom registry
+docker logout myregistry.com
+
+# Pull an image from a Docker registry
+docker pull [registry_url]/[repository_name]:[tag]  # Pull image from the specified registry
+# Example for Docker Hub
+docker pull ubuntu:latest
+# Example for custom registry
+docker pull myregistry.com/myrepo/myimage:latest
+
+# Push an image to a Docker registry
+docker push [registry_url]/[repository_name]:[tag]  # Push image to the specified registry
+# Example for Docker Hub
+docker push myrepo/myimage:latest
+# Example for custom registry
+docker push myregistry.com/myrepo/myimage:latest
+
+# List all images on the local machine (including those tagged for specific registries)
+docker images  # List local images
+
+# Tag an image for a specific registry
+docker tag [local_image_name]:[tag] [registry_url]/[repository_name]:[tag]  # Tag image for the specified registry
+# Example
+docker tag myimage:latest myregistry.com/myrepo/myimage:latest
+
+# Remove an image from a local registry
+docker rmi [image_name]:[tag]  # Remove image from the local Docker registry
+# Example
+docker rmi myrepo/myimage:latest
+
+# Create a new Docker registry container
+docker run -d -p 5000:5000 --name registry registry:2  # Run a local Docker registry on port 5000
+
+# Push an image to a local Docker registry
+docker tag my_image localhost:5000/my_image  # Tag the image for local registry
+docker push localhost:5000/my_image         # Push the image to the local registry
+
+# Pull an image from a local Docker registry
+docker pull localhost:5000/my_image  # Pull the image from the local registry
+
+# Delete an image from a local Docker registry
+docker rmi localhost:5000/my_image  # Remove the image from the local registry
