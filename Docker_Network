@@ -1,0 +1,68 @@
+# Create a new Docker network named 'my_network'
+docker network create my_network       # Create Network
+
+# List all Docker networks
+docker network ls                      # List Networks
+
+# Inspect detailed information about 'my_network'
+docker network inspect my_network      # Inspect Network
+
+# Remove a Docker network named 'my_network'
+docker network rm my_network           # Remove Network
+
+# Connect a container to a network
+docker network connect my_network my_container  # Connect Container to Network
+
+# Disconnect a container from a network
+docker network disconnect my_network my_container  # Disconnect Container from Network
+
+# Run a container with a specific network
+docker run -d --network my_network my_image  # Use Network in Container
+
+# View detailed information about all network configurations of a container
+docker container inspect <container_id> --format '{{ json .NetworkSettings }}'  # Inspect Container Network Settings
+
+# View network usage statistics for a container
+docker stats <container_id>  # View Container Stats
+
+# Create a Docker network with custom driver options
+docker network create --driver overlay my_overlay_network  # Create Network with Custom Driver Options
+
+# List all active network connections on the host
+netstat -tuln  # Host Command to List Network Connections (not a Docker command but useful for networking insight)
+
+# Connect container1 to network2
+docker network connect network2 container1
+
+# Run a container and map multiple ports
+docker run -d -p 80:80 -p 443:443 my_image  # Map Host Ports 80 and 443 to Container Ports 80 and 443
+
+# Run a container with a custom DNS server
+docker run -d --dns 8.8.8.8 my_image  # Use Google DNS Server 8.8.8.8
+
+# Run a container with multiple custom DNS servers
+docker run -d --dns 8.8.8.8 --dns 8.8.4.4 my_image  # Use Google DNS Servers 8.8.8.8 and 8.8.4.4
+
+# Run a container with a custom DNS search domain
+docker run -d --dns-search example.com my_image  # Use Custom DNS Search Domain
+
+# Inspect a container to see its DNS configuration
+docker container inspect <container_id> --format '{{ json .HostConfig.Dns }}'  # View Container DNS Configuration
+
+# Inspect a container to view its DNS search domains
+docker container inspect <container_id> --format '{{ json .HostConfig.DnsSearch }}'  # View Container DNS Search Domains
+
+# List all networks and their DNS configurations
+docker network ls  # List Networks
+
+# Inspect a specific network to view its DNS configuration
+docker network inspect <network_name> --format '{{ json .IPAM.Config }}'  # View Network DNS Configuration
+
+# Create a Docker network with custom DNS settings
+docker network create --dns 8.8.8.8 --dns 8.8.4.4 my_custom_network  # Create Network with Custom DNS Servers
+
+# Connect a container to a network with custom DNS settings
+docker network connect --dns 8.8.8.8 --dns 8.8.4.4 my_custom_network my_container  # Connect Container with Custom DNS
+
+# Remove a network (DNS settings will no longer apply)
+docker network rm <network_name>  # Remove Network
