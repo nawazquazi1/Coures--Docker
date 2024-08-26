@@ -27,6 +27,7 @@ docker node ls                     # Displays a list of nodes in the swarm
 # Inspect a Node
 docker node inspect <NODE_ID>      # Shows detailed information about a specific node
 
+
 # Update Node Configuration
 docker node update <OPTIONS> <NODE_ID>  # Updates the configuration of a node
 
@@ -98,3 +99,27 @@ docker config inspect <CONFIG_NAME>  # Shows detailed information about a specif
 
 # Remove a Config
 docker config rm <CONFIG_NAME>      # Deletes a config from the swarm
+
+# Monitor real-time Docker events
+docker events
+
+# Monitor Docker events from a specific time onwards
+docker events --since <TIME>
+
+# Monitor Docker events filtered by a specific event type (e.g., start, stop)
+docker events --filter event=<EVENT_TYPE>
+
+# Monitor Docker events with additional options or filters
+docker events <OPTIONS>
+
+# Monitor Docker images
+docker images
+
+# List Docker images with more details (including intermediate images)
+docker images -a
+
+# Display the history of an image
+docker history <IMAGE_NAME>
+
+# Inspect details of a specific image
+docker inspect <IMAGE_NAME>
