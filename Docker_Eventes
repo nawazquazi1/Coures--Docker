@@ -1,0 +1,35 @@
+# Monitor real-time Docker events
+docker events
+
+# Monitor Docker events from a specific time onwards
+docker events --since <TIME>
+
+# Monitor Docker events until a specific time
+docker events --until <TIME>
+
+# Monitor Docker events filtered by a specific event type (e.g., start, stop)
+docker events --filter event=<EVENT_TYPE>
+
+# Monitor Docker events filtered by a container name or ID
+docker events --filter container=<CONTAINER_NAME_OR_ID>
+
+# Monitor Docker events filtered by image name or ID
+docker events --filter image=<IMAGE_NAME_OR_ID>
+
+# Monitor Docker events filtered by label
+docker events --filter label=<LABEL_KEY>=<LABEL_VALUE>
+
+# Monitor Docker events filtered by network
+docker events --filter network=<NETWORK_NAME>
+
+# Monitor Docker events filtered by volume
+docker events --filter volume=<VOLUME_NAME>
+
+# Monitor Docker events filtered by plugin
+docker events --filter plugin=<PLUGIN_NAME>
+
+# Monitor Docker events with multiple filters
+docker events --filter <ATTRIBUTE>=<VALUE> --filter <ANOTHER_ATTRIBUTE>=<VALUE>
+
+# Monitor Docker events with custom options or filters
+docker events <OPTIONS>
