@@ -1,0 +1,100 @@
+# Docker Swarm Commands
+
+# Initialize a Docker Swarm
+docker swarm init                  # Initializes the current Docker node as a swarm manager
+
+# Join a Node to the Swarm as a Worker
+docker swarm join --token <WORKER_TOKEN> <MANAGER_IP>:2377  # Adds a node as a worker to an existing swarm using a worker token
+
+# Join a Node to the Swarm as a Manager
+docker swarm join --token <MANAGER_TOKEN> <MANAGER_IP>:2377  # Adds a node as a manager to an existing swarm using a manager token
+
+# Leave a Swarm
+docker swarm leave                 # Removes a node from the swarm
+
+# Remove worker form manger
+docker node rm worker_name
+
+# Demote a Manager Node
+docker node demote <NODE_ID>       # Changes a manager node to a worker node
+
+# Promote a Node to Manager
+docker node promote <NODE_ID>      # Upgrades a worker node to a manager node
+
+# List Nodes in the Swarm
+docker node ls                     # Displays a list of nodes in the swarm
+
+# Inspect a Node
+docker node inspect <NODE_ID>      # Shows detailed information about a specific node
+
+# Update Node Configuration
+docker node update <OPTIONS> <NODE_ID>  # Updates the configuration of a node
+
+# List Services in the Swarm
+docker service ls                  # Displays a list of services in the swarm
+
+# Create a New Service
+docker service create <OPTIONS> <IMAGE>  # Creates a new service in the swarm
+docker service create -- replicas=number <IMAGE>
+docker service create -d -p 8090:80 <IMAGE>
+docker service create --mode=globle <IMAGE>
+docker service create  --constraint="node.role==worker" <IMAGE>
+
+# Inspect a Service
+docker service inspect <SERVICE_ID>   # Shows detailed information about a specific service
+
+# Update a Service
+docker service update <OPTIONS> <SERVICE_ID>  # Updates the configuration of a service
+docker service update --label-add="ssd=true" <SERVICE_ID>
+
+
+# Remove a Service
+docker service rm <SERVICE_ID>       # Deletes a service from the swarm
+
+# Scale a Service
+docker service scale <SERVICE_ID>=<REPLICA_COUNT>  # Adjusts the number of replicas for a service
+
+# List Service Tasks
+docker service ps <SERVICE_ID>       # Displays tasks running for a specific service
+
+# List Stack Deployments
+docker stack ls                     # Shows the stacks deployed in the swarm
+
+# Deploy a Stack
+docker stack deploy -c <COMPOSE_FILE> <STACK_NAME>  # Deploys a new stack from a Compose file
+
+# Inspect a Stack
+docker stack inspect <STACK_NAME>   # Displays detailed information about a specific stack
+
+# Remove a Stack
+docker stack rm <STACK_NAME>        # Deletes a stack and its associated services
+
+# List Services in a Stack
+docker stack services <STACK_NAME>  # Shows services that belong to a specific stack
+
+# List Tasks in a Stack
+docker stack ps <STACK_NAME>        # Displays tasks running for services in a stack
+
+# List Secrets in the Swarm
+docker secret ls                    # Shows secrets available in the swarm
+
+# Create a Secret
+docker secret create <SECRET_NAME> <SECRET_FILE>  # Creates a new secret in the swarm
+
+# Inspect a Secret
+docker secret inspect <SECRET_NAME>  # Shows detailed information about a specific secret
+
+# Remove a Secret
+docker secret rm <SECRET_NAME>      # Deletes a secret from the swarm
+
+# List Configs in the Swarm
+docker config ls                    # Displays configs available in the swarm
+
+# Create a Config
+docker config create <CONFIG_NAME> <CONFIG_FILE>  # Creates a new config in the swarm
+
+# Inspect a Config
+docker config inspect <CONFIG_NAME>  # Shows detailed information about a specific config
+
+# Remove a Config
+docker config rm <CONFIG_NAME>      # Deletes a config from the swarm
