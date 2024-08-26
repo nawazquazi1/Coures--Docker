@@ -14,12 +14,14 @@ services: # All services in your application are defined under the services key
       - app_network # Attach this service to a custom network
 
   app: # The application service (e.g., a Node.js or Python app)
-    build: ./app # Build the Dockerfile located in the ./app directory
+    build:
+      context: ./app # Build the Dockerfile located in the ./app directory
+      args:
+        NODE_ENV: development # Pass build-time arguments
     volumes:
       - ./app:/usr/src/app # Bind mount the local directory to the container for live code updates
-    environment: # Environment variables passed to the container
-      - NODE_ENV=development
-      - DATABASE_URL=mysql://user:password@db:3306/app_db # Database connection string
+    env_file:
+      - ./app/.env # Load environment variables from a file
     depends_on:
       - db # Ensure the app service starts after the db service
     networks:
@@ -45,7 +47,10 @@ services: # All services in your application are defined under the services key
       - app_network
 
   worker: # A background worker service (e.g., for processing tasks)
-    build: ./worker # Build the Dockerfile located in the ./worker directory
+    build:
+      context: ./worker # Build the Dockerfile located in the ./worker directory
+      args:
+        WORKER_ENV: production # Pass build-time arguments
     depends_on:
       - redis # Ensure Redis is available before starting
     networks:
@@ -87,3 +92,8 @@ networks: # Define the custom network
 #
 # 7. If you make changes to your application code or Dockerfile and need to rebuild, use:
 #    docker-compose up --build
+#
+# 8. To build images using build-time arguments, specify in docker-compose.yml:
+#    - args section under build.
+#
+# 9. To load environment variables from a file, specify the file path in the env_file section.
