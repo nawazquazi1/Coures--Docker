@@ -1,0 +1,89 @@
+version: '3.9' # Define the Compose file version (compatible with most Docker versions)
+
+services: # All services in your application are defined under the services key
+  web: # The name of the first service (e.g., a web server)
+    image: nginx:latest # Use the official NGINX image from Docker Hub
+    ports:
+      - "8080:80" # Map port 8080 on the host to port 80 inside the container
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html # Bind mount for serving static content
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro # Bind mount a custom NGINX config, read-only (ro)
+    depends_on: # Ensure the web service starts after the db service
+      - db
+    networks:
+      - app_network # Attach this service to a custom network
+
+  app: # The application service (e.g., a Node.js or Python app)
+    build: ./app # Build the Dockerfile located in the ./app directory
+    volumes:
+      - ./app:/usr/src/app # Bind mount the local directory to the container for live code updates
+    environment: # Environment variables passed to the container
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://user:password@db:3306/app_db # Database connection string
+    depends_on:
+      - db # Ensure the app service starts after the db service
+    networks:
+      - app_network # Attach to the same network as other services
+
+  db: # The database service (e.g., MySQL)
+    image: mysql:8.0 # Use the official MySQL image
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Set the root password
+      MYSQL_DATABASE: app_db # Create a default database
+      MYSQL_USER: user # Set a default user
+      MYSQL_PASSWORD: password # Set the user's password
+    volumes:
+      - db_data:/var/lib/mysql # Persist database data using a named volume
+    networks:
+      - app_network
+
+  redis: # Redis cache service
+    image: redis:alpine # Use the lightweight Redis Alpine image
+    ports:
+      - "6379:6379" # Expose Redis on its default port
+    networks:
+      - app_network
+
+  worker: # A background worker service (e.g., for processing tasks)
+    build: ./worker # Build the Dockerfile located in the ./worker directory
+    depends_on:
+      - redis # Ensure Redis is available before starting
+    networks:
+      - app_network
+
+volumes: # Define named volumes for persistent storage
+  db_data: # Named volume for MySQL database storage
+    driver: local
+
+networks: # Define the custom network
+  app_network: # Name of the network
+    driver: bridge # Use the bridge network driver for simple communication
+
+# Instructions on how to run this file:
+# 1. Navigate to the directory where this docker-compose.yml file is located.
+#    cd /path/to/your/project
+#
+# 2. To build and start the services, use:
+#    docker-compose up
+#
+#    - This command will build (if necessary) and start all containers.
+#    - Use the '-d' flag to run in detached mode (in the background):
+#      docker-compose up -d
+#
+# 3. To see the status of running containers:
+#    docker-compose ps
+#
+# 4. To view logs for all services:
+#    docker-compose logs
+#
+#    - To view logs for a specific service (e.g., the web service):
+#      docker-compose logs web
+#
+# 5. To stop and remove all containers, networks, and volumes:
+#    docker-compose down
+#
+# 6. If you want to remove all data (including volumes), use:
+#    docker-compose down --volumes
+#
+# 7. If you make changes to your application code or Dockerfile and need to rebuild, use:
+#    docker-compose up --build
