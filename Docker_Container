@@ -71,7 +71,7 @@ docker container logs container_id          # Displays the logs of a container
 
 
 # Get stats for all containers
-docker container stats                       # Shows real-time statistics for all running containers
+docker container stats                       # Shows real-time statistics for all running containers  and check memory and cpu
 
 # Inspect a specific container for detailed information
 docker container inspect container_id        # Displays detailed information about a container
