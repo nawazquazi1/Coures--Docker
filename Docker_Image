@@ -50,3 +50,5 @@ docker container commit mycontainer mynewimage:latest  # Save the state of a con
 # Docker Image Inspect
   docker image inspect Image_name:tag  # display detailed information for one or more images
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
