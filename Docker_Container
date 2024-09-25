@@ -110,3 +110,6 @@ docker container commit container_id conatiner_name -author, -a: Author
 --change, -c: Apply Dockerfile instruction to the created image
 --message, -m: Commit message
 --pause, -p: Pause container during commit       # crating runing conatiner image  
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
