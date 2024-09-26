@@ -33,3 +33,5 @@ docker events --filter <ATTRIBUTE>=<VALUE> --filter <ANOTHER_ATTRIBUTE>=<VALUE>
 
 # Monitor Docker events with custom options or filters
 docker events <OPTIONS>
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
