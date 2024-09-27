@@ -66,3 +66,5 @@ docker network connect --dns 8.8.8.8 --dns 8.8.4.4 my_custom_network my_containe
 
 # Remove a network (DNS settings will no longer apply)
 docker network rm <network_name>  # Remove Network
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
