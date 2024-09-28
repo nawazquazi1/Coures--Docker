@@ -93,3 +93,6 @@ docker tag my_image localhost:443/my_image  # Tag image for local registry
 
 # Push the image to the local registry
 docker push localhost:443/my_image  # Push image to local registry
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
